@@ -23,12 +23,12 @@ include('../includes/haut.php'); //contient le doctype, et head.
 			<br>
 				<h1> Formulaire d'ajout d'enfant </h1>
 				<form name="Ajout" id="Ajout" method="post" action="enfants.php">
-					<fieldset><legend>Connexion</legend>
+					<fieldset><legend>Ajout d'Enfant</legend>
 						<label for="Nom" class="float">Nom :</label> <input type="text" name="Nom" id="Nom" value=""/><br/>
 						<label for="Prenom" class="float">Prenom :</label> <input type="text" name="Prenom" id="Prenom"/><br/>
 						<label for="Date" class="float">Date de naissance :</label> <input type="text" name="Date" id="Date"/><br/>
 						<input type="hidden" name="validate" id="validate" value="ok"/>
-						<div class="center"><input type="submit" value="Connexion" /></div>
+						<div class="center"><input type="submit" value="Ajout" /></div>
 					</fieldset>
 				</form>
         </div>
