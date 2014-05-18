@@ -67,7 +67,15 @@ include('../includes/haut.php'); //contient le doctype, et head.
 				<fieldset><legend>Identifiants</legend>
 					<label for="pseudo" class="float">Pseudo :</label> <input type="text" name="pseudo" id="pseudo" size="30" /> <em>(compris entre 3 et 32 caractères)</em><br />
 					<label for="mdp" class="float">Mot de passe :</label> <input type="password" name="mdp" id="mdp" size="30" /> <em>(compris entre 4 et 50 caractères)</em><br />
-					<label for="mdp_verif" class="float">Mot de passe (vérification) :</label> <input type="password" name="mdp_verif" id="mdp_verif" size="30" /><br />
+					<label for="mdp_verif" class="float">Mot de passe (vérification) :</label> <input type="password" name="mdp_verif" id="mdp_verif" size="30" /><br />					
+					<label for="Civilite" class="float">Civilité</label> 
+						<select name="Civilite" id="Civilite">
+							   <option value="Mlle">Mademoiselle</option>
+							   <option value="Mme">Madame</option>
+							   <option value="M">Monsieur</option>
+						</select><br/>	
+					<label for="Nom" class="float">Nom :</label> <input type="text" name="Nom" id="Nom" size="30" /><br />
+					<label for="Prénom" class="float">Prénom :</label> <input type="text" name="Prénom" id="Prénom" size="30" /><br />
 					<!--
 					<label for="mail" class="float">Mail :</label> <input type="text" name="mail" id="mail" size="30" /> <br />
 					<label for="mail_verif" class="float">Mail (vérification) :</label> <input type="text" name="mail_verif" id="mail_verif" size="30" /><br />				

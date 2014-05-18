@@ -165,6 +165,73 @@ else
 	exit();
 }
 
+//Nom
+if(isset($_POST['Nom']))
+{
+	$Nom = trim($_POST['Nom']);
+	/*
+	$Nom_result = checkpseudo($Nom);	
+	if($Nom_result == 'exists')
+	{
+		$_SESSION['pseudo_info'] = '<span class="erreur">Le Nom '.htmlspecialchars($Nom, ENT_QUOTES).' est déjà pris, choisissez-en un autre.</span><br/>';
+		$_SESSION['form_pseudo'] = '';
+		$_SESSION['erreurs']++;
+	}
+		
+	else if($Nom_result == 'ok')
+	{
+		$_SESSION['pseudo_info'] = '';
+		$_SESSION['form_pseudo'] = $Nom;
+	}
+	
+	else if($Nom_result == 'empty')
+	{
+		$_SESSION['pseudo_info'] = '<span class="erreur">Vous n\'avez pas entré de Nom.</span><br/>';
+		$_SESSION['form_pseudo'] = '';
+		$_SESSION['erreurs']++;	
+	}*/
+}
+
+else
+{
+	header('Location: ../index.php');
+	exit();
+}
+
+//Prénom
+if(isset($_POST['Prénom']))
+{
+	$Prénom = trim($_POST['Prénom']);
+	echo $Prénom;
+	/*
+	$Prénom_result = checkpseudo($Prénom);	
+	if($Prénom_result == 'exists')
+	{
+		$_SESSION['pseudo_info'] = '<span class="erreur">Le Nom '.htmlspecialchars($Nom, ENT_QUOTES).' est déjà pris, choisissez-en un autre.</span><br/>';
+		$_SESSION['form_pseudo'] = '';
+		$_SESSION['erreurs']++;
+	}
+		
+	else if($Prénom_result == 'ok')
+	{
+		$_SESSION['pseudo_info'] = '';
+		$_SESSION['form_pseudo'] = $Nom;
+	}
+	
+	else if($Prénom_result == 'empty')
+	{
+		$_SESSION['pseudo_info'] = '<span class="erreur">Vous n\'avez pas entré de Nom.</span><br/>';
+		$_SESSION['form_pseudo'] = '';
+		$_SESSION['erreurs']++;	
+	}*/
+}
+
+else
+{
+	header('Location: ../index.php');
+	exit();
+}
+
 //Mot de passe
 if(isset($_POST['mdp']))
 {
@@ -355,48 +422,58 @@ include('../includes/haut.php'); //contient le doctype, et head.
 <!--Test des erreurs et envoi-->
 			<?php
 			if($_SESSION['erreurs'] == 0)
-			{
-				$insertion = "INSERT INTO connection VALUES('', '".mysql_real_escape_string($pseudo)."',
-				'".md5($mdp)."','','false')";
-				
+			{					
+				$insertion = "INSERT INTO Parents (PERSONNE_ID,LC_CIVILITE,LL_CIVILITE,NOM,PRENOM) VALUES('','M','Monsieur', '".mysql_real_escape_string($Nom)."','".mysql_real_escape_string($Prénom)."')";
+				echo $insertion;
 				if(mysql_query($insertion))
-				{
-					$queries++;
-					vidersession();
-					$_SESSION['inscrit'] = $pseudo;
-					/*informe qu'il s'est déjà inscrit s'il actualise, si son navigateur
-					bugue avant l'affichage de la page et qu'il recharge la page, etc.*/
-				?>
-			<h1>Inscription validée !</h1>
-			<p>Nous vous remercions de vous être inscrit sur notre site, votre inscription a été validée !<br/>
-			Vous pouvez vous connecter avec vos identifiants <a href="connexion.php">ici</a>.
-			</p>
-				<?php
-				}
-				
-				else
-				{
-					if(stripos(mysql_error(), $_SESSION['form_pseudo']) !== FALSE) // recherche du pseudo
+				{							
+					$insertion2 = "SELECT MAX(PERSONNE_ID) FROM Parents";
+					$insertion3 = mysql_query($insertion2);
+					$idmax1= mysql_result($insertion3,0,"MAX(PERSONNE_ID)");
+					
+					
+					$insertion5 = "INSERT INTO connection VALUES('', '".mysql_real_escape_string($pseudo)."',
+					'".md5($mdp)."','".$idmax1."','false')";
+					
+					if(mysql_query($insertion5))
 					{
-						unset($_SESSION['form_pseudo']);
-						$_SESSION['pseudo_info'] = '<span class="erreur">Le pseudo '.htmlspecialchars($pseudo, ENT_QUOTES).' est déjà pris, choisissez-en un autre.</span><br/>';
-						$_SESSION['erreurs']++;
+						$queries++;
+						vidersession();
+						$_SESSION['inscrit'] = $pseudo;
+						/*informe qu'il s'est déjà inscrit s'il actualise, si son navigateur
+						bugue avant l'affichage de la page et qu'il recharge la page, etc.*/
+					?>
+				<h1>Inscription validée !</h1>
+				<p>Nous vous remercions de vous être inscrit sur notre site, votre inscription a été validée !<br/>
+				Vous pouvez vous connecter avec vos identifiants <a href="connexion.php">ici</a>.
+				</p>
+					<?php
 					}
-					/*
-					if(stripos(mysql_error(), $_SESSION['form_mail']) !== FALSE) //recherche du mail
+					
+					else
 					{
-						unset($_SESSION['form_mail']);
-						unset($_SESSION['form_mail_verif']);
-						$_SESSION['mail_info'] = '<span class="erreur">Le mail '.htmlspecialchars($mail, ENT_QUOTES).' est déjà pris, <a href="../contact.php">contactez-nous</a> si vous pensez à une erreur.</span><br/>';
-						$_SESSION['mail_verif_info'] = str_replace('mail', 'mail de vérification', $_SESSION['mail_info']);
-						$_SESSION['erreurs']++;
-						$_SESSION['erreurs']++;
-					}
-					*/
-					if($_SESSION['erreurs'] == 0)
-					{
-						$sqlbug = true; //plantage SQL.
-						$_SESSION['erreurs']++;
+						if(stripos(mysql_error(), $_SESSION['form_pseudo']) !== FALSE) // recherche du pseudo
+						{
+							unset($_SESSION['form_pseudo']);
+							$_SESSION['pseudo_info'] = '<span class="erreur">Le pseudo '.htmlspecialchars($pseudo, ENT_QUOTES).' est déjà pris, choisissez-en un autre.</span><br/>';
+							$_SESSION['erreurs']++;
+						}
+						/*
+						if(stripos(mysql_error(), $_SESSION['form_mail']) !== FALSE) //recherche du mail
+						{
+							unset($_SESSION['form_mail']);
+							unset($_SESSION['form_mail_verif']);
+							$_SESSION['mail_info'] = '<span class="erreur">Le mail '.htmlspecialchars($mail, ENT_QUOTES).' est déjà pris, <a href="../contact.php">contactez-nous</a> si vous pensez à une erreur.</span><br/>';
+							$_SESSION['mail_verif_info'] = str_replace('mail', 'mail de vérification', $_SESSION['mail_info']);
+							$_SESSION['erreurs']++;
+							$_SESSION['erreurs']++;
+						}
+						*/
+						if($_SESSION['erreurs'] == 0)
+						{
+							$sqlbug = true; //plantage SQL.
+							$_SESSION['erreurs']++;
+						}
 					}
 				}
 			}
