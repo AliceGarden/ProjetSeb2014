@@ -25,12 +25,13 @@ if(isset($_SESSION['id_pseudo']))
 			{
 			?>
 				<a href="<?php echo ROOTPATH; ?>/membres/enfants.php">Enfants</a> <br>
-				<a href="<?php echo ROOTPATH; ?>/membres/AjoutEnfant.php">Ajout</a>
+				<a href="<?php echo ROOTPATH; ?>/membres/AjoutEnfant.php">Ajout</a><br>
+				<a href="<?php echo ROOTPATH; ?>/membres/XMLAjoutEleve.php">XML</a><br>
 			<?php
 			}
 else
 {
-	echo 'erreur !';
+	
 }
 			
 ?>

@@ -22,6 +22,7 @@ include('../includes/haut.php'); //contient le doctype, et head.
 		$idParent = mysql_query("SELECT ID_Parent,id_pseudo FROM connection WHERE id_pseudo =".$_SESSION['id_pseudo']);
 		while($reponse = mysql_fetch_assoc($idParent))
 		{$idP = $reponse['ID_Parent']; }
+		//echo $idP;
 		if(isset($_POST['validate']))
 		{
 			$IDN = $_POST['Id_National'];
@@ -41,12 +42,33 @@ include('../includes/haut.php'); //contient le doctype, et head.
 				{				}
 				else{die('Requête invalide : ' . mysql_error());}
 			}
-			else{die('Requête invalide : ' . mysql_error());}
+			else{
+				//die('Requête invalide : ' . mysql_error());
+				$insertion6 = "SELECT NOM,PRENOM,ID_eleve FROM eleves WHERE ID_NATIONAL = '".$IDN."'";
+				$insertion7 = mysql_query($insertion6);
+				//echo $insertion6;
+				while($ele = mysql_fetch_assoc($insertion7))
+				{
+					//echo 'test';
+					if($ele['NOM'] == $NOM && $ele['PRENOM'] == $PRENOM )
+					{
+						$insertion4 = "INSERT INTO parents_eleves (ID_Eleve,ID_Parent) VALUES (".$ele['ID_eleve'].",".$idP.")";
+						if(mysql_query($insertion4))
+						{				}
+						else{die('Requête invalide : ' . mysql_error());
+						}
+					}
+					else {echo 'dommage';}
+					//echo 
+				}
+				//echo 'test fin';
+				//else {die('Requête invalide : ' . mysql_error());}
+			}
 		}		
 		?>
 		
         <div id="contenu">
-		
+
 		<?php 
 		$idParent = mysql_query("SELECT ID_Parent,id_pseudo FROM connection WHERE id_pseudo =".$_SESSION['id_pseudo']);
 		while($reponse = mysql_fetch_assoc($idParent))

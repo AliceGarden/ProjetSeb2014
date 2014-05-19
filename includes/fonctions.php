@@ -68,7 +68,7 @@ function connexionbdd()
     $bd_nom_serveur='localhost';
     $bd_login='root';
     $bd_mot_de_passe='';
-    $bd_nom_bd='see_eleves';
+    $bd_nom_bd='see_eleve';
     //Connexion à la base de données
     mysql_connect($bd_nom_serveur, $bd_login, $bd_mot_de_passe);
     mysql_select_db($bd_nom_bd);
