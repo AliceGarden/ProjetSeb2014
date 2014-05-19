@@ -23,7 +23,11 @@ include('../includes/haut.php'); //contient le doctype, et head.
         <div id="contenu">
 
 		<?php
-
+				
+		
+		
+				If(isset($_POST['valide']))
+				{
 				// On récupère le contenu du fichier XML source
 				$xml_source=file_get_contents("C:\\wamp\\www\\projet_seb\\XML\\test.xml");
 
@@ -39,6 +43,55 @@ include('../includes/haut.php'); //contient le doctype, et head.
 
 				// On supprime le fichier temporair
 				unlink("c:\\wamp\\bin\\mysql\\mysql5.6.12\\data\\see_eleve\\temp.xml");
+				}
+				$query = "SELECT * FROM see_eleve.eleves";
+ 
+				$dbresult = mysql_query($query);
+				 
+				// create a new XML document
+				 
+				$doc = new DomDocument('1.0' , 'ISO-8859-1');
+				 
+				// create root node
+				 
+				$root = $doc->createElement('ELEVES');
+				 
+				$root = $doc->appendChild($root);
+				 
+				 
+				while($row = mysql_fetch_assoc($dbresult)) {   //--> Une ligne à la fois
+				 
+				 
+				 
+				  $occ = $doc->createElement("ELEVE");       //--> Un noed a chaque ligne
+				 
+				  $occ = $root->appendChild($occ);
+				 
+				 
+				 
+				  foreach ($row as $fieldname => $fieldvalue) {   //--> Ajout d'un noeud fils pour chaque champ
+				 
+				 
+				 
+					$child = $doc->createElement($fieldname);    //--> Nom du child et sa valeur a ajouter
+				 
+					$child = $occ->appendChild($child);
+				 
+					$value = $doc->createTextNode($fieldvalue);
+				 
+					$value = $child->appendChild($value);
+				 
+				  }
+				 
+				 
+				 
+				}
+				$doc->formatOutput = TRUE;
+				
+				$doc->save('testEcrit.xml');
+				
+				
+				
 		?>
 		
         </div>
