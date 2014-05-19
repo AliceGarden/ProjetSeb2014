@@ -25,7 +25,13 @@ include('../includes/haut.php'); //contient le doctype, et head.
 		
 		if(isset($_POST['validate']))
 		{
-			$insertion = "UPDATE INTO Parents (NOM,PRENOM) VALUES ('".mysql_real_escape_string($NOM)."','".mysql_real_escape_string($PRENOM)."')";			
+			$nom = $_POST['Nom'];
+			$prenom = $_POST['Prenom'];
+			$insertion = "UPDATE Parents (NOM,PRENOM) VALUES ('".mysql_real_escape_string($nom)."','".mysql_real_escape_string($prenom)."' WHERE Personne_id =".$idP."')";
+			if(mysql_query($insertion))
+			{				
+			}
+			else{die('Requête invalide : ' . mysql_error());}
 		}		
 		$InfoPa = mysql_query("SELECT nom, prenom FROM Parents WHERE Personne_id =".$idP);
 		while($reponse = mysql_fetch_assoc($InfoPa))
@@ -38,7 +44,7 @@ include('../includes/haut.php'); //contient le doctype, et head.
         <div id="contenu">
 		<br>
 		<h1> Informations Personnels </h1>
-				<form name="Modification" id="Modification" method="post" action="momcompte.php">
+				<form name="Modification" id="Modification" method="post" action="moncompte.php">
 					<fieldset><legend>Modification des Informations Personnels</legend>
 						<label for="Nom" class="float">Nom :</label> <input type="text" name="Nom" id="Nom" value="<?php echo $nom; ?>"/><br/>
 						<label for="Prenom" class="float">Prenom :</label> <input type="text" name="Prenom" id="Prenom" value="<?php echo $prenom; ?>"/><br/>
