@@ -26,8 +26,9 @@ include('../includes/haut.php'); //contient le doctype, et head.
 		{
 			$IDN = $_POST['Id_National'];
 			$NOM = $_POST['Nom'];
-			//$SEX = $_POST['Sexe'];
-			$insertion = "INSERT INTO eleves (ID_Eleve,ID_NATIONAL,NOM) VALUES ('', '".mysql_real_escape_string($IDN)."','".mysql_real_escape_string($NOM)."')";			
+			$SEX = $_POST['Sexe'];
+			$PRENOM = $_POST['Prenom'];
+			$insertion = "INSERT INTO eleves (ID_Eleve,ID_NATIONAL,NOM,PRENOM,CODE_SEXE) VALUES ('', '".mysql_real_escape_string($IDN)."','".mysql_real_escape_string($NOM)."','".mysql_real_escape_string($PRENOM)."','".mysql_real_escape_string($SEX)."')";			
 			if(mysql_query($insertion))
 			{
 				$insertion2 = "SELECT MAX(ID_Eleve) FROM eleves";
