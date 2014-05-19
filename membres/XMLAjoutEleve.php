@@ -89,6 +89,7 @@ include('../includes/haut.php'); //contient le doctype, et head.
 				$doc->formatOutput = TRUE;
 				
 				$doc->save('testEcrit.xml');
+				//...
 				
 				
 				
