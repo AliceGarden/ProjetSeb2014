@@ -18,15 +18,11 @@ include('../includes/haut.php'); //contient le doctype, et head.
         include('../includes/colg.php');
         ?>
         </div>
-        
-		
-        <div id="contenu">
-
-		<?php
+        <?php
+				
 				
 		
-		
-				If(isset($_POST['valide']))
+				if(isset($_POST['validate']))
 				{
 				// On récupère le contenu du fichier XML source
 				$xml_source=file_get_contents("C:\\wamp\\www\\projet_seb\\XML\\test.xml");
@@ -43,6 +39,7 @@ include('../includes/haut.php'); //contient le doctype, et head.
 
 				// On supprime le fichier temporair
 				unlink("c:\\wamp\\bin\\mysql\\mysql5.6.12\\data\\see_eleve\\temp.xml");
+				echo "import fait";
 				}
 				$query = "SELECT * FROM see_eleve.eleves";
  
@@ -94,6 +91,14 @@ include('../includes/haut.php'); //contient le doctype, et head.
 				
 				
 		?>
+		
+        <div id="contenu">
+			
+			
+			<form name="Ajout" id="Ajout" method="post" action="XMLAjoutEleve.php">
+			<input type="hidden" name="validate" id="validate" value="ok"/>
+			<div class="center"><input type="submit" value="Import XML" /></div>
+		
 		
         </div>
         

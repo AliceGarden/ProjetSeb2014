@@ -39,8 +39,8 @@ include('../includes/haut.php'); //contient le doctype, et head.
 							   <option value="chine">Chine</option>
 							   <option value="japon">Japon</option>
 						   </select><br/>
-						<label for="Sexe"> Sexe de l'enfant :	<input type="radio" name="Sexe" value="0" id="Garçon" /> <label for="moins15">Garçon</label>
-																<input type="radio" name="Sexe" value="1" id="Fille" /> <label for="medium15-25">Fille</label><br />
+						<label for="Sexe"> Sexe de l'enfant :	<input type="radio" name="Sexe" value="1" id="Garçon" /> <label for="moins15">Garçon</label>
+																<input type="radio" name="Sexe" value="2" id="Fille" /> <label for="medium15-25">Fille</label><br />
 						<label for="Doublement">Redoublement ?</label> <input type="checkbox" name="Doublement" id="Doublement"/> <br/>
 						<label for="SMS">Accepte les SMS ?</label> <input type="checkbox" name="SMS" id="SMS"/> <br/>
 						<label for="Transport">Adhession au transport ?</label> <input type="checkbox" name="Transport" id="Transport"/> <br/>

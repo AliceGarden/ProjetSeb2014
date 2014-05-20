@@ -62,7 +62,7 @@ Aucune information/erreur
 			else
 			{
 			?>
-				<form name="connexion" id="connexion" method="post" action="membres/connexion.php">
+				<form name="connexion" id="connexion" method="post" action="<?php echo ROOTPATH; ?>/membres/connexion.php">
 				<fieldset><legend>Connexion</legend>
 					<label for="pseudo" class="float">Pseudo :</label> <input type="text" name="pseudo" id="pseudo" value="<?php if(isset($_SESSION['connexion_pseudo'])) echo $_SESSION['connexion_pseudo']; ?>"/>
 					<label for="password" class="float">Passe :</label> <input type="password" name="password" id="password"/>

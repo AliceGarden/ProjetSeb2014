@@ -422,9 +422,25 @@ include('../includes/haut.php'); //contient le doctype, et head.
 <!--Test des erreurs et envoi-->
 			<?php
 			if($_SESSION['erreurs'] == 0)
-			{					
-				$insertion = "INSERT INTO Parents (PERSONNE_ID,LC_CIVILITE,LL_CIVILITE,NOM,PRENOM) VALUES('','M','Monsieur', '".mysql_real_escape_string($Nom)."','".mysql_real_escape_string($Prénom)."')";
-				echo $insertion;
+			{	
+				if ($_POST['Civilite'] == "Mlle")
+				{
+					$Long = "Mademoiselle";
+				}
+				else
+				{
+					if($_POST['Civilite'] == "Mme")
+					{
+						$Long = "Madame";
+					}
+					else
+					{
+						$Long = "Monsieur";
+					}
+				}
+				//echo $Long;
+				$insertion = "INSERT INTO Parents (PERSONNE_ID,LC_CIVILITE,LL_CIVILITE,NOM,PRENOM) VALUES('','".$_POST['Civilite']."','".mysql_real_escape_string($Long)."', '".mysql_real_escape_string($Nom)."','".mysql_real_escape_string($Prénom)."')";
+				//echo $insertion;
 				if(mysql_query($insertion))
 				{							
 					$insertion2 = "SELECT MAX(PERSONNE_ID) FROM Parents";

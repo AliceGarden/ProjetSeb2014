@@ -29,6 +29,9 @@ include('../includes/haut.php'); //contient le doctype, et head.
 			$NOM = $_POST['Nom'];
 			$SEX = $_POST['Sexe'];
 			$PRENOM = $_POST['Prenom'];
+			$Doub = $_POST['Doublement'];
+			$SMS = $_POST['SMS'];
+			$Trans = $_POST['Transport'];
 			$insertion = "INSERT INTO eleves (ID_Eleve,ID_NATIONAL,NOM,PRENOM,CODE_SEXE) VALUES ('', '".mysql_real_escape_string($IDN)."','".mysql_real_escape_string($NOM)."','".mysql_real_escape_string($PRENOM)."','".mysql_real_escape_string($SEX)."')";			
 			if(mysql_query($insertion))
 			{
@@ -44,13 +47,13 @@ include('../includes/haut.php'); //contient le doctype, et head.
 			}
 			else{
 				//die('Requête invalide : ' . mysql_error());
-				$insertion6 = "SELECT NOM,PRENOM,ID_eleve FROM eleves WHERE ID_NATIONAL = '".$IDN."'";
+				$insertion6 = "SELECT NOM,CODE_SEXE,ID_eleve FROM eleves WHERE ID_NATIONAL = '".$IDN."'";
 				$insertion7 = mysql_query($insertion6);
 				//echo $insertion6;
 				while($ele = mysql_fetch_assoc($insertion7))
 				{
 					//echo 'test';
-					if($ele['NOM'] == $NOM && $ele['PRENOM'] == $PRENOM )
+					if($ele['NOM'] == $NOM && $ele['CODE_SEXE'] == $SEX )
 					{
 						$insertion4 = "INSERT INTO parents_eleves (ID_Eleve,ID_Parent) VALUES (".$ele['ID_eleve'].",".$idP.")";
 						if(mysql_query($insertion4))
@@ -58,7 +61,7 @@ include('../includes/haut.php'); //contient le doctype, et head.
 						else{die('Requête invalide : ' . mysql_error());
 						}
 					}
-					else {echo 'dommage';}
+					else {echo "Vous n'êtes pas un parent de l'enfant";}
 					//echo 
 				}
 				//echo 'test fin';
